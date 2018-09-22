@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+	<meta charset="UTF-8">
+	<title>Items Management</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"> </script>
+	<script type="text/javascript" src="app/myApp.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+	</head>
+<body ng-controller="ItemController as itemController" ng-init="getAllItems()">
+	<div class="ui text container">
+		<div class="ui center aligned">
+			<h2 class="ui center aligned header">
+				<i class="settings icon"></i>
+					<div class="content">
+						Items Management
+					<div class="sub header">REST API</div>
+					</div>
+			</h2>			
+		</div>
+	<form ng-submit="addItem()">
+		 <table border="1" class="ui definition table">
+         	<tr>
+            	<th>Item No.</th>
+            	<th>Name</th>
+            	<th>Amount</th>
+            	<th>InventoryCode</th>
+         	</tr>
+	      <tr>
+	         <td><input size="7" type="text" ng-model="item.itemNo" /></td>
+	         <td><input size="5" type="text" ng-model="item.name" /></td>
+	         <td><input size="5" type="text" ng-model="item.amount"  /></td>
+	         <td><input size="9" type="text" ng-model="item.inventoryCode"  /></td>
+	         <td> <input size="10" class="ui teal button" type="submit" value="Add Item" /></td>
+	      </tr>
+	   	</table>
+	</form>
+	 <table border="1" class="ui definition table">
+         <tr>
+            <th>Item No.</th>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>InventoryCode</th>
+            <th>View</th>
+            <th>Delete</th>
+         </tr>
+         <tr ng-repeat="item in items">
+            <td> {{ item.itemNo }}</td>
+            <td> {{ item.name }}</td>
+            <td >{{ item.amount }}</td>
+            <td >{{ item.inventoryCode }}</td>
+		 	<td><button class="ui teal basic button" ng-click="getItem(item.itemNo)">View</button></td>
+		    <td><button class="ui teal basic button" ng-click="deleteItem(item.itemNo)" >Delete</button></td>
+         </tr>
+     </table>
+      <div ng-show="ifget" >
+	      <label><b>Item No. : </b></label>{{itembyid.itemNo}}<br>
+	      <label><b>Name : </b></label>{{itembyid.name}}<br>
+	      <label><b>Amount : </b></label>{{itembyid.amount}}<br>
+	      <label><b>InventoryCode : </b></label>{{itembyid.inventoryCode}}<br>
+      <br>
+	  <table border="0">
+	      <tr>
+	         <td>Amount</td>
+	         <td><input type="text" ng-model="amount"  /></td>
+	      </tr>
+	      <tr>
+	         <td><button class="ui teal button" ng-click="depositItem(itembyid.itemNo,amount)">Deposit</button></td>
+	         <td><button class="ui teal button" ng-click="withdrawalItem(itembyid.itemNo,amount)" >Withdrawal</button></td>
+	      </tr>
+	   </table>
+     </div>
+   </div>
+</body>
+</html>
